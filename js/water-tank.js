@@ -12,8 +12,9 @@ class WaterTank {
   }
 
   update() {
-    for (const thing of this.things) {
-      thing.update();
+    for (let i = 0; i < this.things.length; i++) {
+      this.things[i].update();
+      if (this.things[i].isDead) this.things.splice(i, 1);
     }
   }
 

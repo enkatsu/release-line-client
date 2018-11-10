@@ -2,6 +2,7 @@ class LineMover {
   constructor() {
     this.vertexes = [];
     this.isStart = false;
+    this.isDead = false;
     this.strokeColor = [255, 255, 255];
     this.maxWeight = 10;
     this.boundary = null;
@@ -28,6 +29,18 @@ class LineMover {
     }
   }
 
+  isInside() {
+    for (const vertex of this.vertexes) {
+      if (
+        0 > vertex.x || vertex.x > this.boundary.width ||
+        0 > vertex.y || vertex.y > this.boundary.height
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   update() {
     if (!this.isStart) return;
     if (this.vertexes.length < 2) return;
@@ -40,6 +53,7 @@ class LineMover {
       }
       // if(this.boundary) speed = this.bound(i, speed);
       this.vertexes[i].add(speed);
+      if(this.isInside()) this.isDead = true;
     }
   }
 

@@ -29,11 +29,11 @@ class LineMover {
     }
   }
 
-  isInside() {
+  isInsideAll() {
     for (const vertex of this.vertexes) {
       if (
-        0 > vertex.x || vertex.x > this.boundary.width ||
-        0 > vertex.y || vertex.y > this.boundary.height
+        0 < vertex.x && vertex.x < this.boundary.width &&
+        0 < vertex.y && vertex.y < this.boundary.height
       ) {
         return true;
       }
@@ -53,7 +53,7 @@ class LineMover {
       }
       // if(this.boundary) speed = this.bound(i, speed);
       this.vertexes[i].add(speed);
-      if(this.isInside()) this.isDead = true;
+      if(!this.isInsideAll()) this.isDead = true;
     }
   }
 

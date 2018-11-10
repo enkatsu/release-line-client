@@ -6,6 +6,7 @@ class LineMover {
     this.strokeColor = [255, 255, 255];
     this.maxWeight = 10;
     this.boundary = null;
+    this.maxLength = 50;
   }
 
   start() {
@@ -14,6 +15,9 @@ class LineMover {
 
   pushVertex(vertex) {
     this.vertexes.push(vertex);
+    if(this.vertexes.length > this.maxLength) {
+      this.vertexes.shift();
+    }
   }
 
   bound(i, speed) {

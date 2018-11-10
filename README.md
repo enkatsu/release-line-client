@@ -1,4 +1,4 @@
-# release-line-client
+# release-line
 
 [GitHub Pages](https://enkatsu.github.io/release-line-client/)
 

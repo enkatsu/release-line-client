@@ -1,6 +1,6 @@
 # release-line
 
-[GitHub Pages](https://enkatsu.github.io/release-line-client/)
+[Demo](https://enkatsu.github.io/release-line-client/)
 
 ![](./main.gif)
 

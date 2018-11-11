@@ -16,7 +16,6 @@ function setup() {
      'attack' : 0.1
    }
   }).toMaster();
-  frameRate(20);
 }
 
 function draw() {

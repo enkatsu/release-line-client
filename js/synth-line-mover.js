@@ -1,0 +1,2 @@
+class SynthLineMover extends LineMover {
+}

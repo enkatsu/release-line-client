@@ -19,6 +19,8 @@ class WaterTank {
   }
 
   draw() {
-    for (const thing of this.things) thing.draw();
+    for (const thing of this.things) {
+      thing.draw();
+    }
   }
 }

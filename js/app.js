@@ -1,12 +1,21 @@
 let waterTank = null;
 let isDragged = false;
 let drawingLine = null;
+let synth = null;
 
 function setup() {
   const myCanvas = createCanvas(windowWidth, windowHeight);
   myCanvas.parent('myContainer');
   smooth();
   waterTank = new WaterTank(windowWidth, windowHeight);
+  synth = new Tone.MonoSynth({
+  	"oscillator" : {
+  		"type" : "square"
+   },
+   "envelope" : {
+   	"attack" : 0.1
+   }
+  }).toMaster();
 }
 
 function draw() {
@@ -17,11 +26,11 @@ function draw() {
 }
 
 function mousePressed() {
-  drawingLine = new LineMover();
+  drawingLine = new SynthLineMover(synth);
 }
 
 function mouseReleased() {
-  if(drawingLine.vertexes.length >= 2) {
+  if(drawingLine.vertexes.length >= 3) {
     drawingLine.start();
     waterTank.confine(drawingLine);
   }

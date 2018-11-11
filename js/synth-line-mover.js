@@ -4,17 +4,22 @@ class SynthLineMover extends LineMover {
     super();
     this.prevAng = null;
     this.synth = synth;
+    this.minNote = 440;
+    this.maxNote = 880;
   }
 
   update() {
     super.update();
+    this.playSound();
+  }
+
+  playSound() {
     if(this.prevAng) {
       const nowAng =
         p5.Vector.sub(this.vertexes[0], this.vertexes[1]).angleBetween(
           p5.Vector.sub(this.vertexes[2], this.vertexes[1]));
       if(this.prevAng - nowAng > PI / 4) {
-        const note = map(this.prevAng - nowAng, PI / 4, PI / 2, 110, 220);
-        // const note = map(this.prevAng - nowAng, PI / 4, PI / 2, 440, 880);
+        const note = map(this.prevAng - nowAng, PI / 4, PI / 2, this.minNote, this.maxNote);
         const duration = map(this.vertexes.length, 0, this.maxLength, 0, 0.05);
         this.synth.triggerAttackRelease(note, duration);
       }

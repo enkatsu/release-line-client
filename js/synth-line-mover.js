@@ -14,22 +14,23 @@ class SynthLineMover extends LineMover {
   }
 
   playSound() {
+    const reversed = this.vertexes.slice().reverse();
     if(this.prevAng) {
       const nowAng =
-        p5.Vector.sub(this.vertexes[0], this.vertexes[1]).angleBetween(
-          p5.Vector.sub(this.vertexes[2], this.vertexes[1]));
+        p5.Vector.sub(reversed[0], reversed[1]).angleBetween(
+          p5.Vector.sub(reversed[2], reversed[1]));
       if(this.prevAng - nowAng > PI / 4) {
         const note = map(this.prevAng - nowAng, PI / 4, PI / 2, this.minNote, this.maxNote);
-        const duration = map(this.vertexes.length, 0, this.maxLength, 0, 0.05);
+        const duration = map(reversed.length, 0, this.maxLength, 0, 0.05);
         this.synth.triggerAttackRelease(note, duration);
       }
       this.prevAng =
-        p5.Vector.sub(this.vertexes[0], this.vertexes[1]).angleBetween(
-          p5.Vector.sub(this.vertexes[2], this.vertexes[1]));
+        p5.Vector.sub(reversed[0], reversed[1]).angleBetween(
+          p5.Vector.sub(reversed[2], reversed[1]));
     } else {
       this.prevAng =
-        p5.Vector.sub(this.vertexes[0], this.vertexes[1]).angleBetween(
-          p5.Vector.sub(this.vertexes[2], this.vertexes[1]));
+        p5.Vector.sub(reversed[0], reversed[1]).angleBetween(
+          p5.Vector.sub(reversed[2], reversed[1]));
     }
   }
 

@@ -9,8 +9,15 @@ function setup() {
   smooth();
   waterTank = new WaterTank(windowWidth, windowHeight);
   synth = new Tone.MonoSynth({
-    'oscillator' : { 'type' : 'square8' },
-    'envelope' : { 'attack' : 0.1 }
+    oscillator: {
+      type: 'triangle'
+    },
+    envelope: {
+      attack: 0.005,
+      decay: 0.1,
+      sustain: 0.3,
+      release: 1
+    }
   }).toMaster();
 }
 
@@ -18,7 +25,7 @@ function draw() {
   background(0);
   waterTank.update();
   waterTank.draw();
-  if(drawingLine) drawingLine.draw();
+  if (drawingLine) drawingLine.draw();
 }
 
 function mousePressed() {
@@ -26,7 +33,7 @@ function mousePressed() {
 }
 
 function mouseReleased() {
-  if(drawingLine.vertexes.length >= 3) {
+  if (drawingLine.vertexes.length >= 3) {
     drawingLine.start();
     waterTank.confine(drawingLine);
   }

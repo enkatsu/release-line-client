@@ -6,6 +6,9 @@ class SynthLineMover extends LineMover {
     this.synth = synth;
     this.minNote = 440;
     this.maxNote = 880;
+    this.minDuration = 0;
+    this.maxDuration = 0.05;
+    this.thresholdAng = PI / 4;
   }
 
   update() {
@@ -16,22 +19,27 @@ class SynthLineMover extends LineMover {
   playSound() {
     const reversed = this.vertexes.slice().reverse();
     if(this.prevAng) {
-      const nowAng =
-        p5.Vector.sub(reversed[0], reversed[1]).angleBetween(
-          p5.Vector.sub(reversed[2], reversed[1]));
-      if(this.prevAng - nowAng > PI / 4) {
-        const note = map(this.prevAng - nowAng, PI / 4, PI / 2, this.minNote, this.maxNote);
-        const duration = map(reversed.length, 0, this.maxLength, 0, 0.05);
+      const nowAng = this.calcHeadAngle();
+      if(this.prevAng - nowAng > this.thresholdAng) {
+        const note =
+          map(this.prevAng - nowAng, this.thresholdAng, PI / 2, this.minNote, this.maxNote);
+        const duration =
+          map(reversed.length, 0, this.maxLength, this.minDuration, this.maxDuration);
         this.synth.triggerAttackRelease(note, duration);
+        this.strokeColor = color(255, 0, 0);
+      } else {
+        this.strokeColor = color(255);
       }
-      this.prevAng =
-        p5.Vector.sub(reversed[0], reversed[1]).angleBetween(
-          p5.Vector.sub(reversed[2], reversed[1]));
+      this.prevAng = this.calcHeadAngle();
     } else {
-      this.prevAng =
-        p5.Vector.sub(reversed[0], reversed[1]).angleBetween(
-          p5.Vector.sub(reversed[2], reversed[1]));
+      this.prevAng = this.calcHeadAngle();
     }
+  }
+
+  calcHeadAngle() {
+    const reversed = this.vertexes.slice().reverse();
+    return p5.Vector.sub(reversed[0], reversed[1])
+      .angleBetween(p5.Vector.sub(reversed[2], reversed[1]));
   }
 
   debugDraw() {

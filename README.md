@@ -1,6 +1,6 @@
 # release-line
 
-[Demo](https://enkatsu.github.io/release-line-client/)
+[Demo](https://enkatsu.github.io/release-line/)
 
 ![](./main.gif)
 

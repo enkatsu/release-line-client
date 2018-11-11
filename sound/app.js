@@ -9,12 +9,8 @@ function setup() {
   smooth();
   waterTank = new WaterTank(windowWidth, windowHeight);
   synth = new Tone.MonoSynth({
-    'oscillator' : {
-      'type' : 'square8'
-   },
-   'envelope' : {
-     'attack' : 0.1
-   }
+    'oscillator' : { 'type' : 'square8' },
+    'envelope' : { 'attack' : 0.1 }
   }).toMaster();
 }
 

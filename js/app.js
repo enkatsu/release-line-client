@@ -21,8 +21,10 @@ function mousePressed() {
 }
 
 function mouseReleased() {
-  drawingLine.start();
-  waterTank.confine(drawingLine);
+  if(drawingLine.vertexes.length >= 2) {
+    drawingLine.start();
+    waterTank.confine(drawingLine);
+  }
   drawingLine = null;
 }
 
